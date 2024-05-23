@@ -12,10 +12,13 @@ interface Author {
 
 }
 
-interface PostProps{
+interface Post{
     author: Author;
-    publisheadAt:Date;
-    content: Content[];
+    publisheadAt: Date;
+    content: Content[]
+}
+interface PostProps{
+ post: Post
 }
 
 interface Content {
@@ -25,18 +28,18 @@ interface Content {
 
 
 
-export function Post({ author, publisheadAt, content } :PostProps) {
+export function Post({ post } :PostProps) {
     const [comments, setComments] = useState([
        'post muito bacana' 
     ]);
 
     const [newCommentText, setNewCommentText] = useState('');
 
-    const publisheadDateFormatted = format(publisheadAt, "d 'de' LLL 'às' HH:mm'h'", {
+    const publisheadDateFormatted = format(post.publisheadAt, "d 'de' LLL 'às' HH:mm'h'", {
         locale: ptBR,
     });
 
-    const publisheadDateRelativeToNow = formatDistanceToNow(publisheadAt, {
+    const publisheadDateRelativeToNow = formatDistanceToNow(post.publisheadAt, {
         locale: ptBR,
         addSuffix: true,
     });
@@ -74,10 +77,10 @@ export function Post({ author, publisheadAt, content } :PostProps) {
         <article className={styles.post}>
             <header>
                 <div className={styles.author}>
-                    <Avatar hasBorder={true} src={author.avatarUrl} />
+                    <Avatar hasBorder={true} src={post.author.avatarUrl} />
                     <div className={styles.authorInfo}>
-                        <strong>{author.name}</strong>
-                        <span>{author.role}</span>
+                        <strong>{post.author.name}</strong>
+                        <span>{post.author.role}</span>
                     </div>
                 </div>
                 <time title={publisheadDateFormatted} dateTime={publisheadAt.toISOString()}>

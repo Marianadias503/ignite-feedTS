@@ -6,6 +6,7 @@ import { Sidebar } from "./components/Sidebar";
 
  
  const posts = [
+  
   {
     id:1,
     author:{
